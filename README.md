@@ -2,6 +2,21 @@
 
 Sistema de automação para TV com integração entre a grade da TV Cultura, CasparCG, Blackmagic DeckLink, ATEM/StudioHD e fontes locais.
 
+## Versão operacional validada
+
+**V1.36.6 — LOGO INTERVALOS CORRIGIDO**
+
+Validada em teste operacional em 03/10/2026.
+
+Principais pontos consolidados nesta versão:
+
+- grade integral da Cultura quando o período eleitoral estiver desabilitado;
+- prioridade HTML com XML/TXT apenas como fallback;
+- logo MP1 controlado pelo DSK1 do ATEM;
+- logo entra 3 segundos após o início de uma linha válida de PROGRAMA;
+- logo sai 5 segundos antes do fim efetivo da linha;
+- início da próxima linha da grade encerra a condição anterior, evitando logo ativo em chamadas, classificações e intervalos.
+
 ## Documentação
 
 - [Visão Geral do Sistema](docs/00-VISAO-GERAL.md)
@@ -15,9 +30,15 @@ Sistema de automação para TV com integração entre a grade da TV Cultura, Cas
 - [Módulo 08 — Interface e Configurações](docs/08-INTERFACE-CONFIGURACOES.md)
 - [Módulo 09 — Falhas e Segurança Operacional](docs/09-FALHAS-SEGURANCA.md)
 - [Módulo 10 — Eleitoral (Arquivado)](docs/10-ELEITORAL-ARQUIVADO.md)
+- [Histórico de alterações](CHANGELOG.md)
 
 ## Estado da documentação
 
-A base documental foi criada a partir do funcionamento e dos requisitos consolidados do Scheduler V1.36.x.
+A documentação separa:
 
-Funções ainda em reconstrução, como o novo conceito de BLOCO, estão identificadas como **REQUISITO / PROJETO** e não como função operacional concluída.
+- **OPERACIONAL** — já existente e usado;
+- **REVISAR** — existente, mas deve ser auditado antes de mudanças estruturais;
+- **ARQUIVADO** — lógica histórica que não pertence ao núcleo permanente;
+- **REQUISITO / PROJETO** — função ainda a reconstruir.
+
+O módulo de BLOCO permanece como **REQUISITO / PROJETO** até a reconstrução da lógica de playlist sequencial.

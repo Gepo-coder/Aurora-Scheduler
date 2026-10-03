@@ -4,42 +4,82 @@
 
 Acionar automaticamente o logo carregado no Media Player 1 do ATEM durante a programação normal da TV Cultura.
 
+## Integração correta
+
+O logo é colocado no ar pelo **DSK1 — Downstream Keyer 1** do ATEM.
+
+O Media Player 1 fornece a arte/fonte do logo e o Scheduler controla o estado ON/OFF do DSK1.
+
 ## Regra operacional
 
-O logo deve ficar ligado quando forem simultaneamente verdadeiros:
+O logo só pode ficar ligado quando forem simultaneamente verdadeiros:
 
-- fonte operacional: Cultura;
-- campo **Veiculação** vazio;
-- campo **Tipo** igual a `PROGRAMA`.
+- PROGRAM do ATEM está na fonte Cultura;
+- a **linha atual** da grade possui **Veiculação vazia**;
+- o **Tipo** da linha atual é `PROGRAMA`.
 
 ```
 CULTURA
++ linha atual
 + Veiculação == ""
 + Tipo == "PROGRAMA"
-→ MP1 ON
+→ janela válida do logo
 ```
 
-Ao sair dessa condição:
+## Temporização
+
+Dentro de uma linha válida de PROGRAMA:
+
+- **ON:** 3 segundos após o início;
+- **OFF:** 5 segundos antes do fim efetivo.
 
 ```
-→ MP1 OFF
+INÍCIO PROGRAMA
+      +3 s
+       ↓
+    DSK1 ON
+       │
+       │
+    DSK1 OFF
+       ↑
+      -5 s
+FIM EFETIVO
 ```
 
-## Fonte dos dados
+## Fim efetivo da linha
 
-Veiculação e Tipo vêm do parser da grade da TV Cultura.
+A duração declarada do PROGRAMA não é usada isoladamente.
 
-## Integração ATEM
+Se a próxima linha da grade começar antes do término nominal do programa, o início dessa próxima linha encerra o estado da linha anterior.
 
-A arte do logo continua preparada previamente no Media Player 1 do ATEM.
+Isso evita que o logo permaneça ligado em:
 
-O Scheduler controla o keyer necessário para colocar ou retirar o logo do ar.
+- chamadas;
+- classificação indicativa;
+- pacotes;
+- boletins;
+- intervalos;
+- qualquer outra linha cujo Tipo não seja PROGRAMA.
+
+## Comportamento fora da condição
+
+Qualquer condição abaixo força o logo para OFF:
+
+- ATEM fora da Cultura;
+- Veiculação preenchida;
+- Tipo diferente de PROGRAMA;
+- período entre linhas;
+- janela final de 5 segundos do PROGRAMA.
 
 ## Interface
 
-- `LOGO MP1: ON`
-- `LOGO MP1: OFF`
+A interface apresenta o estado do controle como:
 
-## Estado
+- `LOGO MP1 / DSK1: ON`
+- `LOGO MP1 / DSK1: OFF`
 
-**OPERACIONAL na linha V1.36.2**, sujeito a validação prática no ar.
+## Validação
+
+**V1.36.6 — validada em teste operacional em 03/10/2026.**
+
+Resultado confirmado: entrada e retirada automática do logo funcionando corretamente.

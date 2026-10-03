@@ -33,6 +33,7 @@ O núcleo permanente do sistema é composto por:
 - comutação de fontes via ATEM/StudioHD;
 - integração com vMix;
 - controle de PGM local;
+- controle automático do logo MP1 via DSK1;
 - persistência de estado e configurações;
 - logs e tratamento de falhas.
 
@@ -51,6 +52,12 @@ Prioridade consolidada:
 2. XML/TXT somente como fallback quando o HTML estiver vazio ou falhar.
 3. Nunca misturar HTML e XML/TXT na mesma grade operacional.
 
+## Grade integral
+
+Com o período eleitoral desabilitado, a grade exibida passa a representar a programação integral da Cultura.
+
+As linhas integrais servem como referência operacional e também alimentam automações de estado, como o logo MP1.
+
 ## OFFSET Cultura
 
 O OFFSET é aplicado somente aos eventos derivados da grade da Cultura.
@@ -62,7 +69,7 @@ O OFFSET não deve alterar horários locais independentes, PGM locais ou BLOCOS 
 
 ## Estado do projeto
 
-Versão operacional consolidada até a família V1.36.x.
+**V1.36.6 validada em teste operacional em 03/10/2026.**
 
 A documentação separa:
 

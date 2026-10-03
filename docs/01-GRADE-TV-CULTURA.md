@@ -28,6 +28,22 @@ Usado somente quando o HTML estiver vazio ou houver falha real no acesso/leitura
 
 A grade operacional não deve combinar simultaneamente eventos de HTML e XML/TXT.
 
+## Grade integral
+
+Quando o período eleitoral estiver desabilitado, o Scheduler passa a manter e exibir a **grade integral da Cultura**, sem limitar a visualização apenas a linhas políticas/estaduais.
+
+Isso inclui, conforme recebido da fonte:
+
+- PROGRAMA;
+- chamadas;
+- classificações indicativas;
+- pacotes;
+- boletins;
+- intervalos;
+- demais eventos presentes na grade.
+
+Essas linhas integrais não devem ser tratadas automaticamente como inserts locais. Elas também funcionam como referência de estado para outros módulos.
+
 ## Atualização
 
 A atualização deve distinguir:
@@ -66,8 +82,8 @@ Os eventos devem manter, quando disponíveis:
 - tipo;
 - nome/evento.
 
-Esses campos também alimentam outras automações, como o Logo MP1.
+Esses campos alimentam outras automações, inclusive o módulo Logo MP1.
 
 ## Estado
 
-**OPERACIONAL**, com prioridade HTML > XML/TXT consolidada na linha V1.35.9 / V1.36.x.
+**OPERACIONAL**, com grade integral e prioridade HTML > XML/TXT consolidadas na V1.36.6.
